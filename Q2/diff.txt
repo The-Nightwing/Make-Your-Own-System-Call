@@ -1797,7 +1797,7 @@ Binary files my_linux-5.9/kernel/~/root/User/workspaceStorage/1603827966437/stat
 Binary files my_linux-5.9/kernel/~/root/User/workspaceStorage/1603827966437/state.vscdb.backup and linux-5.9/kernel/~/root/User/workspaceStorage/1603827966437/state.vscdb.backup differ
 diff -ruN my_linux-5.9/kernel/sys.c linux-5.9/kernel/sys.c
 --- my_linux-5.9/kernel/sys.c	2020-10-12 02:45:50.000000000 +0530
-+++ linux-5.9/kernel/sys.c	2020-10-28 01:17:15.895256339 +0530
++++ linux-5.9/kernel/sys.c	2020-10-28 03:41:27.592241308 +0530
 @@ -848,6 +848,70 @@
  	return __sys_setfsuid(uid);
  }
@@ -1847,7 +1847,7 @@ diff -ruN my_linux-5.9/kernel/sys.c linux-5.9/kernel/sys.c
 +	strcat(line,temp);
 +	strcat(line,"\n");
 +
-+	value = (long)task->dl.dl_runtime;
++	value = (long)task->se.vruntime;
 +	printk("Runtime: %ld",value);
 +	sprintf(temp,"%ld",value);
 +	strcat(line,"Runtime: ");
