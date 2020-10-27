@@ -16,19 +16,24 @@ int main()
 	pid = fork(); 
 
    if(pid==0){
+	printf("Initial Value for child: %d\n",g);
+
      for(int i=0;i<100;i++){
       g--;
    }
-     printf("Value of g: %d\n",g);
+
+     printf("Final Value for child: %d\n",g);
    }
    else if(pid>0){
       int status;
     waitpid(pid,&status,0);
+	
+	printf("Initial Value for Parent: %d\n",g);
     
    for(int i=0;i<90;i++){
          g++;
    }
-   printf("Value of g: %d\n",g);
+   printf("Final Value for Parent: %d\n",g);
    }
 
    else if(pid<0){
