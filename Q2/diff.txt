@@ -1,18 +1,18 @@
-diff -rupN my_linux/arch/x86/entry/syscalls/syscall_64.tbl linux-5.9/arch/x86/entry/syscalls/syscall_64.tbl
---- my_linux/arch/x86/entry/syscalls/syscall_64.tbl	2020-10-12 02:45:50.000000000 +0530
-+++ linux-5.9/arch/x86/entry/syscalls/syscall_64.tbl	2020-10-28 15:53:47.419168917 +0530
+diff -rupN linux-1/arch/x86/entry/syscalls/syscall_64.tbl linux-2/arch/x86/entry/syscalls/syscall_64.tbl
+--- linux-1/arch/x86/entry/syscalls/syscall_64.tbl	2020-10-12 02:45:50.000000000 +0530
++++ linux-2/arch/x86/entry/syscalls/syscall_64.tbl	2020-10-28 17:50:16.590841606 +0530
 @@ -404,3 +404,4 @@
  545	x32	execveat		compat_sys_execveat
  546	x32	preadv2			compat_sys_preadv64v2
  547	x32	pwritev2		compat_sys_pwritev64v2
-+548     64      sh_task_info		sys_sh_task_info	
-diff -rupN my_linux/kernel/sys.c linux-5.9/kernel/sys.c
---- my_linux/kernel/sys.c	2020-10-12 02:45:50.000000000 +0530
-+++ linux-5.9/kernel/sys.c	2020-10-28 15:52:27.590332255 +0530
-@@ -980,6 +980,76 @@ SYSCALL_DEFINE1(times, struct tms __user
- 	return (long) jiffies_64_to_clock_t(get_jiffies_64());
++548     64      sh_task_info		sys_sh_task_info
+diff -rupN linux-1/kernel/sys.c linux-2/kernel/sys.c
+--- linux-1/kernel/sys.c	2020-10-12 02:45:50.000000000 +0530
++++ linux-2/kernel/sys.c	2020-10-28 17:49:19.099674045 +0530
+@@ -193,7 +193,75 @@ static int set_one_prio(struct task_stru
+ out:
+ 	return error;
  }
- 
 +SYSCALL_DEFINE2(sh_task_info, pid_t, pid, char *, filename)
 +{
 +  	struct task_struct *task;
@@ -48,7 +48,7 @@ diff -rupN my_linux/kernel/sys.c linux-5.9/kernel/sys.c
 +	strcpy(line,"Process Name: ");
 +	strcat(line,task->comm);
 +	strcat(line,"\n");
-+
+ 
 +	value = (long)task->state;
 +	printk("State: %ld",value);
 +	strcat(line,"State: ");
@@ -82,7 +82,6 @@ diff -rupN my_linux/kernel/sys.c linux-5.9/kernel/sys.c
 +
 +  return 0;
 +}
-+
- #ifdef CONFIG_COMPAT
- static compat_clock_t clock_t_to_compat_clock_t(clock_t x)
+ SYSCALL_DEFINE3(setpriority, int, which, int, who, int, niceval)
  {
+ 	struct task_struct *g, *p;
