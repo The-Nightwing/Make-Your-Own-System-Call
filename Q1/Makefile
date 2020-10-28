@@ -8,7 +8,7 @@ run1: compile1
 
 compile2:
 # 	Compile your code for second part here
-	gcc Q1_part2.c -lpthread
+	gcc Q1_part2.c -pthread
 
 run2: compile2
 #	Execute part 2 here

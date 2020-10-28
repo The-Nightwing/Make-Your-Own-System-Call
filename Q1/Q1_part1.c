@@ -18,7 +18,7 @@ int main()
    if(pid==0){
 	printf("Initial Value for child: %d\n",g);
 
-     for(int i=0;i<100;i++){
+   while(g!=-90){
       g--;
    }
 
@@ -30,8 +30,8 @@ int main()
 	
 	printf("Initial Value for Parent: %d\n",g);
     
-   for(int i=0;i<90;i++){
-         g++;
+   while(g!=100){
+      g++;
    }
    printf("Final Value for Parent: %d\n",g);
    }

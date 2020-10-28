@@ -11,9 +11,9 @@ void *child(void *arg){
 
 printf("Initial Value for child: %d\n",a);
 
-   for(int i=0;i<100;i++){
-      a--;
-   }
+  while(a!=-90){
+     a--;
+  }
 
    printf("Final Value for child: %d\n",a);
 }
@@ -26,9 +26,11 @@ int main()
    pthread_join(tid,NULL);
 
   printf("Initial Value for Parent: %d\n",a);
-      for(int i=0;i<90;i++){
+
+      while(a!=100){
          a++;
       }
+      
    printf("Final Value for Parent: %d\n",a);
 
    return 0;

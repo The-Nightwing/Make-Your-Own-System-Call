@@ -3,6 +3,6 @@ compile:
 	gcc test.c
 
 run: compile
-	./a.out 907 name.txt
+	./a.out 1629 file.txt
 	
 
